@@ -1,4 +1,17 @@
-function Contact(props) {
+// interface ContactProps {
+//     name: string;
+//     phone: string;
+//     email: string;
+// }
+
+type ContactProps = {
+  name: string;
+  phone: string;
+  email: string;
+};
+
+
+const Contact: React.FC<ContactProps> = (props) => {
   console.log(props);  
   return (
     <>
