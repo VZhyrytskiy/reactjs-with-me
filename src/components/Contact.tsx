@@ -1,25 +1,21 @@
-// interface ContactProps {
-//     name: string;
-//     phone: string;
-//     email: string;
-// }
-
-type Person = {
-  name: string;
-  phone: string;
-  email: string;
-  isAvailable: boolean;
-  age: number;
-};
+import { Person } from '../models';
 
 type ContactProps = {
-  person: Person;
+  person?: Person;
+};
+
+const defaultPerson: Person = {
+  name: "Vitaliy",
+  phone: "+38 067 000 00 00",
+  email: "v.zhiritskiy@gmail.com",
+  isAvailable: true,
+  age: 30
 };
 
 
 const Contact: React.FC<ContactProps> = (props) => {
   console.log(props);
-  const { name, phone, email, isAvailable, age } = props.person;  
+  const { name = 'Vitaliy', phone, email, isAvailable = false, age } = props.person ?? defaultPerson;
   return (
     <>
         <h2>Contact</h2>

@@ -1,14 +1,6 @@
 import './App.css'
 import Contact from './components/Contact'
-
-type Person = {
-  name: string;
-  phone: string;
-  email: string;
-  isAvailable: boolean;
-  age: number;
-};
-
+import { Person } from './models';
 
 function App() {
   const person: Person = {
@@ -26,4 +18,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
