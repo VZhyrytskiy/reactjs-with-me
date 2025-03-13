@@ -1,19 +1,14 @@
 import './App.css'
-import Contact from './components/Contact'
-import { Person } from './models';
+import SectionTitle from './components/SectionTitle';
 
 function App() {
-  const person: Person = {
-    name: "Vitaliy",
-    phone: "+38 067 000 00 00",
-    email: "v.zhiritskiy@gmail.com",
-    isAvailable: true,
-    age: 30
-  };
+
 
   return (
     <>
-      <Contact person={person} />
+      <SectionTitle id="section1">
+        <h2>Section Title 1</h2>
+      </SectionTitle>
     </>
   )
 }
