@@ -1,14 +1,16 @@
 import './App.css'
-import SectionTitle from './components/SectionTitle';
+import Contact from './components/Contact';
+import WithSpinner from './hoc/WithSpinner';
+import { person } from './mockdata/person';
+
+const ContactWithSpinner = WithSpinner(Contact);
 
 function App() {
-
+  const isLoading = false;
 
   return (
     <>
-      <SectionTitle id="section1">
-        <h2>Section Title 1</h2>
-      </SectionTitle>
+      <ContactWithSpinner isLoading={isLoading} person={person} />    
     </>
   )
 }
