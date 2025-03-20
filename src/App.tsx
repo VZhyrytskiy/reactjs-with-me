@@ -1,11 +1,14 @@
 import './App.css'
-import ConditionalRendering from './components/ConditionalRendering/ConditionalRendering';
+import Contact from './components/Contact';
+import { people } from './mockdata/person';
 
 
 function App() {
   return (
     <>
-      <ConditionalRendering />
+        {people.map((person, index) => {
+          return <Contact key={index} person={person} />
+        })}
     </>
   )
 }
