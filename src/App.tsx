@@ -1,14 +1,12 @@
 import './App.css'
-import Contact from './components/Contact';
+import ContactList from './components/ContactList/ContactList';
 import { people } from './mockdata/person';
 
 
 function App() {
   return (
     <>
-        {people.map((person, index) => {
-          return <Contact key={index} person={person} />
-        })}
+       <ContactList people={people} />
     </>
   )
 }

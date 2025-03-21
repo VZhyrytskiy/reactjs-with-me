@@ -1,4 +1,4 @@
-import { Person } from '../models';
+import { Person } from '../../models';
 
 type ContactProps = {
   person?: Person;
