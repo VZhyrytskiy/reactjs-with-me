@@ -14,13 +14,24 @@ const defaultPerson: Person = {
 
 
 const Contact: React.FC<ContactProps> = (props) => {
-  console.log(props);
   const { name = 'Vitaliy', phone, email, isAvailable = false, age } = props.person ?? defaultPerson;
+  
+  const handleClick = (event) => {
+    // event.stopPropagation();
+    console.log('Contact clicked (фаза сплиття)' );
+  };
+
+  const handleClickCapture = (event) => {
+    // event.stopPropagation();
+    console.log('Contact clicked (фаза захоплення)' );
+  };
   return (
     <>
         <h2>Contact</h2>
         <section>
-            <p>Name: {name}</p>
+            <p 
+            onClick={handleClick}
+            onClickCapture={handleClickCapture}>Name: {name}</p>
             <p>Phone: {phone}</p>
             <p>Email: {email}</p>
             <p>isAvailable: {isAvailable.toString()}</p>

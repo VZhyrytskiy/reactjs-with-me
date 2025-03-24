@@ -1,11 +1,12 @@
 import './App.css'
-import Button from './components/Button/Button';
+import ContactList from './components/ContactList/ContactList';
+import { people } from './mockdata/person';
 
 
 function App() {
   return (
     <>
-       <Button />
+       <ContactList people={people} />
     </>
   )
 }
