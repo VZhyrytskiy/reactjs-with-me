@@ -11,18 +11,19 @@ import Child from "../Child/Child";
 function Parent() {
     const showMessage = () => {
         console.log('Hello from Child');
-    };
+    }
 
     const showMessageWithData = (data: string) => {
         console.log(`Hello from ${data}`);
-    };
+    }
 
     return (
         <Child 
-            data={'Hello from Parent'}
+            data={'Hello from Parent'} 
             notifyParent={showMessage}
             notifyParentWithData={showMessageWithData}
-            callParentFn={() => showMessageWithData('Anna')} />
+            callParentFn={() => showMessageWithData('Anna')}
+        />
     )
 }
 
