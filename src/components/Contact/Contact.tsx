@@ -1,4 +1,5 @@
 import { Person } from '../../models';
+import './Contact.css';
 
 type ContactProps = {
   person?: Person;
@@ -15,28 +16,31 @@ const defaultPerson: Person = {
 
 const Contact: React.FC<ContactProps> = (props) => {
   const { name = 'Vitaliy', phone, email, isAvailable = false, age } = props.person ?? defaultPerson;
-  
-  const handleClick = (event) => {
+
+  const handleClick = (event: React.MouseEvent<HTMLParagraphElement>) => {
     // event.stopPropagation();
-    console.log('Contact clicked (фаза сплиття)' );
+    console.log('Contact clicked (фаза сплиття)');
   };
 
-  const handleClickCapture = (event) => {
+  const handleClickCapture = (event: React.MouseEvent<HTMLParagraphElement>) => {
     // event.stopPropagation();
-    console.log('Contact clicked (фаза захоплення)' );
+    console.log('Contact clicked (фаза захоплення)');
   };
   return (
     <>
-        <h2>Contact</h2>
-        <section>
-            <p 
-            onClick={handleClick}
-            onClickCapture={handleClickCapture}>Name: {name}</p>
-            <p>Phone: {phone}</p>
-            <p>Email: {email}</p>
-            <p>isAvailable: {isAvailable.toString()}</p>
-            <p>Age: {age}</p>
-        </section>
+      <h2>Contact</h2>
+      <section>
+        <p
+          onClick={handleClick}
+          onClickCapture={handleClickCapture}>
+            <span className='label'>Name:</span> 
+            <span style={{'color': 'blue', 'marginLeft': '1rem'}}>{name}</span>
+        </p>
+        <p>Phone: {phone}</p>
+        <p>Email: {email}</p>
+        <p>isAvailable: {isAvailable.toString()}</p>
+        <p>Age: {age}</p>
+      </section>
     </>
   )
 }

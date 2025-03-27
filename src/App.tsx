@@ -1,11 +1,12 @@
 import './App.css'
-import Parent from './components/ParentChildCommunication/Parent/Parent';
+import ContactList from './components/ContactList/ContactList';
+import { people } from './mockdata/person';
 
 
 function App() {
   return (
     <>
-      <Parent />
+      <ContactList people={people} />
     </>
   )
 }
