@@ -1,5 +1,4 @@
 import { Person } from '../../models';
-import './Contact.css';
 
 type ContactProps = {
   person?: Person;
@@ -33,8 +32,8 @@ const Contact: React.FC<ContactProps> = (props) => {
         <p
           onClick={handleClick}
           onClickCapture={handleClickCapture}>
-            <span className='label'>Name:</span> 
-            <span style={{'color': 'blue', 'marginLeft': '1rem'}}>{name}</span>
+            <span className='font-bold'>Name:</span> 
+            <span className='text-blue-800 ml-4'>{name}</span>
         </p>
         <p>Phone: {phone}</p>
         <p>Email: {email}</p>
