@@ -13,7 +13,7 @@ function ContactList(props: ContactListProps) {
     };
 
     const handleClickCapture = (event: React.MouseEvent<HTMLDivElement>) => {
-        event.stopPropagation();
+        // event.stopPropagation();
         console.log('ContactList clicked (фаза захоплення)');
     };
 

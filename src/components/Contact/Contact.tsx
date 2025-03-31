@@ -15,6 +15,7 @@ const defaultPerson: Person = {
 
 const Contact: React.FC<ContactProps> = (props) => {
   const { name = 'Vitaliy', phone, email, isAvailable = false, age } = props.person ?? defaultPerson;
+  let localName = name;
 
   const handleClick = (event: React.MouseEvent<HTMLParagraphElement>) => {
     // event.stopPropagation();
@@ -25,6 +26,12 @@ const Contact: React.FC<ContactProps> = (props) => {
     // event.stopPropagation();
     console.log('Contact clicked (фаза захоплення)');
   };
+
+  const changeName = () => {
+    localName = 'New Name 2'; // This will not trigger a re-render
+    console.log('Change name button clicked!');
+  };
+  
   return (
     <>
       <h2>Contact</h2>
@@ -33,12 +40,13 @@ const Contact: React.FC<ContactProps> = (props) => {
           onClick={handleClick}
           onClickCapture={handleClickCapture}>
             <span className='font-bold'>Name:</span> 
-            <span className='text-blue-800 ml-4'>{name}</span>
+            <span className='text-blue-800 ml-4'>{localName}</span>
         </p>
         <p>Phone: {phone}</p>
         <p>Email: {email}</p>
         <p>isAvailable: {isAvailable.toString()}</p>
         <p>Age: {age}</p>
+        <button onClick={changeName}>Change Name</button>
       </section>
     </>
   )
