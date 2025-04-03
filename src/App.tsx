@@ -3,6 +3,7 @@ import './App.css'
 import ContactList from './components/ContactList/ContactList';
 import { people } from './mockdata/person';
 import { Person } from './models';
+import LazyStateInit from './components/LazyStateInit/LazyStateInit';
 
 
 function App() {
@@ -19,8 +20,9 @@ function App() {
 
   return (
     <>
-      <button onClick={changeContacts}>Change Contacts</button>
-      <ContactList people={contacts} />
+      {/* <button onClick={changeContacts}>Change Contacts</button>
+      <ContactList people={contacts} /> */}
+      <LazyStateInit />
     </>
   )
 }
