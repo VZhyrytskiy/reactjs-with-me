@@ -3,17 +3,25 @@ import Contact from "../Contact/Contact";
 
 interface ContactListProps {
     people: Person[],
+    addNewContact: () => void;
 }
 
 function ContactList(props: ContactListProps) {
-    const { people } = props;
+    const { people, addNewContact } = props;
 
     return (
-        <div>
-            {people.map((person, index) => {
-                return <Contact key={index} person={person} />
-            })}
-        </div>
+        <>
+            <button
+                className="uppercase"
+                onClick={addNewContact}>
+                add contact
+            </button>
+            <div>
+                {people.map((person, index) => {
+                    return <Contact key={index} person={person} />
+                })}
+            </div>
+        </>
     )
 }
 
