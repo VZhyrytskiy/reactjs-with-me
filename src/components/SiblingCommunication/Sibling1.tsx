@@ -3,8 +3,8 @@ interface Sibling1Props {
     changeData: (key: 's1' | 's2', text: string) => void;
 }
 
-function Sibling1(prop: Sibling1Props) {
-    const { text, changeData } = prop;
+function Sibling1(props: Sibling1Props) {
+    const { text, changeData } = props;
     
     const handleClick = () => {
         changeData('s2', 'new content from sibling1 for sibling2');
