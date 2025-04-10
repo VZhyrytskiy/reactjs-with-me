@@ -1,11 +1,11 @@
 import './App.css'
-import Parent from './components/SiblingCommunication/Parent';
+import ProfileForm from './components/ProfileForm/ProfileForm';
 
 function App() {
   console.log('App component rendered!');
 
   return (
-      <Parent /> 
+      <ProfileForm /> 
   )
 }
 
