@@ -2,11 +2,16 @@ import { useState } from "react";
 
 function ProfileForm() {
     const [userName, setUserName] = useState<string>('Vitaliy');
+    const [hobbies, setHobbies] = useState<string>('');
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log('User name:', userName);
+        const payload = {
+            userName, hobbies
+        }
+        console.log('Payload:', payload);
         setUserName('');
+        setHobbies('');
     };
 
   return (
@@ -22,6 +27,15 @@ function ProfileForm() {
                 value={userName}
                 onChange={(e) => setUserName(e.target.value)}
                 className="border-1 rounded bg-white border-gray-300 p-2" />
+            <label htmlFor="hobbies" className="capitalize text-left font-bold mt-4">hobbies:</label>
+            <textarea 
+                id="hobbies"
+                rows={4}
+                className="border-1 rounded bg-white border-gray-300 p-2"
+                placeholder="Your hobbies..." 
+                value={hobbies}
+                onChange={(e) => setHobbies(e.target.value)}
+            />
             <button type="submit" className="w-30 capitalize self-center">save</button>
         </form>
     </>
