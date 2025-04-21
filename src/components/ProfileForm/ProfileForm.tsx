@@ -1,17 +1,34 @@
 import { useState } from "react";
 
+interface UserProfile {
+    [key: string]: string;
+}
+
 function ProfileForm() {
-    const [userName, setUserName] = useState<string>('Vitaliy');
-    const [hobbies, setHobbies] = useState<string>('');
+    const [userProfile, setUserProfile] = useState<UserProfile>({
+        userName: 'Vitaliy',
+        hobbies: ''
+    });
+
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { name, value } = event.target;
+        setUserProfile((prevState) => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        const payload = {
-            userName, hobbies
-        }
+        const payload = { ...userProfile }
         console.log('Payload:', payload);
-        setUserName('');
-        setHobbies('');
+
+        const clearedProfile = Object.keys(userProfile).reduce((acc: UserProfile, key) => {
+            acc[key] = '';
+            return acc;
+        }, {} as UserProfile);
+
+        setUserProfile(clearedProfile);
     };
 
   return (
@@ -24,17 +41,19 @@ function ProfileForm() {
             <input 
                 id="userName"
                 type="text"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                name="userName"
+                value={userProfile.userName}
+                onChange={onChangeInput}
                 className="border-1 rounded bg-white border-gray-300 p-2" />
             <label htmlFor="hobbies" className="capitalize text-left font-bold mt-4">hobbies:</label>
             <textarea 
                 id="hobbies"
                 rows={4}
                 className="border-1 rounded bg-white border-gray-300 p-2"
-                placeholder="Your hobbies..." 
-                value={hobbies}
-                onChange={(e) => setHobbies(e.target.value)}
+                placeholder="Your hobbies..."
+                name="hobbies" 
+                value={userProfile.hobbies}
+                onChange={onChangeInput}
             />
             <button type="submit" className="w-30 capitalize self-center">save</button>
         </form>
