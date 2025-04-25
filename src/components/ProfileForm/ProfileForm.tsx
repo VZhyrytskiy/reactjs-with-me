@@ -1,20 +1,25 @@
 import { useState } from "react";
 
 interface UserProfile {
-    [key: string]: string;
+    userName: string;
+    hobbies: string;
+    showAdvancedSettings: boolean;
 }
 
+const initialUserProfile: UserProfile = {
+    userName: '',
+    hobbies: '',
+    showAdvancedSettings: false
+};
+
 function ProfileForm() {
-    const [userProfile, setUserProfile] = useState<UserProfile>({
-        userName: 'Vitaliy',
-        hobbies: ''
-    });
+    const [userProfile, setUserProfile] = useState<UserProfile>(initialUserProfile);
 
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = event.target;
+        const { name, value, type } = event.target;
         setUserProfile((prevState) => ({
             ...prevState,
-            [name]: value
+            [name]: type === 'checkbox' ? (event.target as HTMLInputElement).checked : value
         }));
     };
 
@@ -23,12 +28,7 @@ function ProfileForm() {
         const payload = { ...userProfile }
         console.log('Payload:', payload);
 
-        const clearedProfile = Object.keys(userProfile).reduce((acc: UserProfile, key) => {
-            acc[key] = '';
-            return acc;
-        }, {} as UserProfile);
-
-        setUserProfile(clearedProfile);
+        setUserProfile(initialUserProfile);
     };
 
   return (
@@ -55,6 +55,16 @@ function ProfileForm() {
                 value={userProfile.hobbies}
                 onChange={onChangeInput}
             />
+            <label htmlFor="showAdvancedSettings" className="capitalize text-left font-bold mt-4">
+                <input 
+                    id="showAdvancedSettings"
+                    type="checkbox"
+                    name="showAdvancedSettings"
+                    checked={userProfile.showAdvancedSettings}
+                    onChange={onChangeInput}
+                    className="border-1 rounded bg-white border-gray-300 p-2 mr-4" />
+                <span>show advanced settings</span>
+            </label>
             <button type="submit" className="w-30 capitalize self-center">save</button>
         </form>
     </>
