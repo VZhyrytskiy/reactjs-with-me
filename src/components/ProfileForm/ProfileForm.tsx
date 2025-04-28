@@ -4,16 +4,19 @@ interface UserProfile {
     userName: string;
     hobbies: string;
     showAdvancedSettings: boolean;
+    visibility: string;
 }
 
 const initialUserProfile: UserProfile = {
     userName: '',
     hobbies: '',
-    showAdvancedSettings: false
+    showAdvancedSettings: false,
+    visibility: 'private'
 };
 
 function ProfileForm() {
     const [userProfile, setUserProfile] = useState<UserProfile>(initialUserProfile);
+    const { userName, hobbies, showAdvancedSettings, visibility } = userProfile;
 
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value, type } = event.target;
@@ -42,7 +45,7 @@ function ProfileForm() {
                 id="userName"
                 type="text"
                 name="userName"
-                value={userProfile.userName}
+                value={userName}
                 onChange={onChangeInput}
                 className="border-1 rounded bg-white border-gray-300 p-2" />
             <label htmlFor="hobbies" className="capitalize text-left font-bold mt-4">hobbies:</label>
@@ -52,7 +55,7 @@ function ProfileForm() {
                 className="border-1 rounded bg-white border-gray-300 p-2"
                 placeholder="Your hobbies..."
                 name="hobbies" 
-                value={userProfile.hobbies}
+                value={hobbies}
                 onChange={onChangeInput}
             />
             <label htmlFor="showAdvancedSettings" className="capitalize text-left font-bold mt-4">
@@ -60,11 +63,52 @@ function ProfileForm() {
                     id="showAdvancedSettings"
                     type="checkbox"
                     name="showAdvancedSettings"
-                    checked={userProfile.showAdvancedSettings}
+                    checked={showAdvancedSettings}
                     onChange={onChangeInput}
                     className="border-1 rounded bg-white border-gray-300 p-2 mr-4" />
                 <span>show advanced settings</span>
             </label>
+
+            {showAdvancedSettings && (
+                <section className="flex flex-col">
+                    <h3 className="text-left font-bold mt-4">Налаштування видимості профілю</h3>
+                    <label htmlFor="visibility-private" className="capitalize text-left mt-4">
+                        <input 
+                            id="visibility-private"
+                            type="radio"
+                            name="visibility"
+                            value="private"
+                            checked={visibility === 'private'}
+                            onChange={onChangeInput}
+                            className="mr-4" />
+                        <span>тільки я</span>
+                    </label>
+                    <label htmlFor="visibility-friends" className="capitalize text-left">
+                        <input 
+                            id="visibility-friends"
+                            type="radio"
+                            name="visibility"
+                            value="friends"
+                            checked={visibility === 'friends'}
+                            onChange={onChangeInput}
+                            className="mr-4" />
+                        <span>друзі</span>
+                    </label>
+                    <label htmlFor="visibility-all" className="capitalize text-left">
+                        <input 
+                            id="visibility-all"
+                            type="radio"
+                            name="visibility"
+                            value="all"
+                            checked={visibility === 'all'}
+                            onChange={onChangeInput}
+                            className="mr-4" />
+                        <span>всі</span>
+                    </label>
+                </section>
+            )}
+
+
             <button type="submit" className="w-30 capitalize self-center">save</button>
         </form>
     </>
