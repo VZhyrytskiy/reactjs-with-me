@@ -5,20 +5,24 @@ interface UserProfile {
     hobbies: string;
     showAdvancedSettings: boolean;
     visibility: string;
+    color: string;
 }
 
 const initialUserProfile: UserProfile = {
     userName: '',
     hobbies: '',
     showAdvancedSettings: false,
-    visibility: 'private'
+    visibility: 'private',
+    color: ''
 };
+
+const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
 
 function ProfileForm() {
     const [userProfile, setUserProfile] = useState<UserProfile>(initialUserProfile);
-    const { userName, hobbies, showAdvancedSettings, visibility } = userProfile;
+    const { userName, hobbies, showAdvancedSettings, visibility, color } = userProfile;
 
-    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const onChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = event.target;
         setUserProfile((prevState) => ({
             ...prevState,
@@ -107,6 +111,19 @@ function ProfileForm() {
                     </label>
                 </section>
             )}
+
+            <label htmlFor="color" className="capitalize text-left font-bold mt-4">favorite color:</label>
+            <select 
+                id="color"
+                name="color"
+                value={color}
+                onChange={onChangeInput}
+                className="border-1 rounded bg-white border-gray-300 p-2">
+                <option value=''>Select Favorite Color</option>
+                {colors.map((color) => (
+                    <option key={color} value={color}>{color}</option>
+                ))}
+            </select>
 
 
             <button type="submit" className="w-30 capitalize self-center">save</button>
