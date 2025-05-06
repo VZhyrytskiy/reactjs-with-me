@@ -6,6 +6,7 @@ interface UserProfile {
     showAdvancedSettings: boolean;
     visibility: string;
     color: string;
+    cuisines: string[];
 }
 
 const initialUserProfile: UserProfile = {
@@ -13,21 +14,44 @@ const initialUserProfile: UserProfile = {
     hobbies: '',
     showAdvancedSettings: false,
     visibility: 'private',
-    color: ''
+    color: '',
+    cuisines: []
 };
 
 const colors = ['red', 'green', 'blue', 'yellow', 'purple', 'orange'];
 
+const cuisinesData = [
+    { value: "italian", label: "Італійська" },
+    { value: "japanese", label: "Японська" },
+    { value: "mexican", label: "Мексиканська" },
+    { value: "indian", label: "Індійська" },
+    { value: "french", label: "Французька" },
+];
+
 function ProfileForm() {
     const [userProfile, setUserProfile] = useState<UserProfile>(initialUserProfile);
-    const { userName, hobbies, showAdvancedSettings, visibility, color } = userProfile;
+    const { userName, hobbies, showAdvancedSettings, visibility, color, cuisines } = userProfile;
 
     const onChangeInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value, type } = event.target;
-        setUserProfile((prevState) => ({
-            ...prevState,
-            [name]: type === 'checkbox' ? (event.target as HTMLInputElement).checked : value
-        }));
+        const { name, value, type, multiple } = event.target as HTMLSelectElement;
+        
+        // multiple select handling
+        if (type === 'select-multiple' && multiple) {
+            const selectedOptions = Array.from((event.target as HTMLSelectElement).selectedOptions, (option) => option.value);
+            setUserProfile((prevState) => ({
+                ...prevState,
+                [name]: selectedOptions
+            }));
+            return;
+        }
+
+        // text input, textarea, checkbox, radio, single select handling
+        else {
+            setUserProfile((prevState) => ({
+                ...prevState,
+                [name]: (event.target as HTMLInputElement).type === 'checkbox' ? (event.target as HTMLInputElement).checked : value
+            }));
+        }        
     };
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -122,6 +146,19 @@ function ProfileForm() {
                 <option value=''>Select Favorite Color</option>
                 {colors.map((color) => (
                     <option key={color} value={color}>{color}</option>
+                ))}
+            </select>
+
+            <label htmlFor="cuisines" className="capitalize text-left font-bold mt-4">favorite cuisines:</label>
+            <select 
+                multiple
+                id="cuisines"
+                name="cuisines"
+                value={cuisines}
+                onChange={onChangeInput}
+                className="border-1 rounded bg-white border-gray-300 p-2">
+                {cuisinesData.map((cuisine) => (
+                    <option key={cuisine.value} value={cuisine.value}>{cuisine.label}</option>
                 ))}
             </select>
 
