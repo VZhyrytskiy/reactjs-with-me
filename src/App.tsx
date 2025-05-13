@@ -1,11 +1,11 @@
 import './App.css'
-import ProfileForm from './components/ProfileForm/ProfileFormUC';
+import VideoPlayer from './components/VideoPlayer/VideoPlayer';
 
 function App() {
   console.log('App component rendered!');
 
   return (
-      <ProfileForm /> 
+      <VideoPlayer />
   )
 }
 
