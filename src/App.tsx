@@ -1,11 +1,11 @@
 import './App.css'
-import VideoPlayer from './components/VideoPlayer/VideoPlayer';
+import {Timer1, Timer2, Timer3 } from './components/Timer/Timer';
 
 function App() {
   console.log('App component rendered!');
 
   return (
-      <VideoPlayer />
+      <Timer3 />
   )
 }
 
